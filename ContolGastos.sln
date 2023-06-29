@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIControlGastos", "APIControlGastos\APIControlGastos.csproj", "{3366EF23-F7C4-443B-813C-EE9769D1DCAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlDeGasto", "ControlDeGasto\ControlDeGasto.csproj", "{7684FE7B-8C26-49C8-9F89-75C4F0CED3C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3366EF23-F7C4-443B-813C-EE9769D1DCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3366EF23-F7C4-443B-813C-EE9769D1DCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3366EF23-F7C4-443B-813C-EE9769D1DCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3366EF23-F7C4-443B-813C-EE9769D1DCAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7684FE7B-8C26-49C8-9F89-75C4F0CED3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7684FE7B-8C26-49C8-9F89-75C4F0CED3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7684FE7B-8C26-49C8-9F89-75C4F0CED3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7684FE7B-8C26-49C8-9F89-75C4F0CED3C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEA85901-3986-481E-BE33-8E4510F91549}
+	EndGlobalSection
+EndGlobal

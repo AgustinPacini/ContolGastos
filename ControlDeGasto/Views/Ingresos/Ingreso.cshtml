@@ -1,0 +1,134 @@
+﻿@model ControlDeGasto.Models.GastoModel
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Ingresos</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Ingresos</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                <div id="Fecha" class="form-group" style="margin-top:10px; margin-right:3px">
+                    <label for="fecha">Fecha:</label>
+                    <input type="datetime" id="txtFecha" name="txtPackage" style="cursor: pointer;width: 50px;"  />
+                </div>
+                <div id="Monto" class="form-group" style="margin-top:10px; margin-right:3px">
+                    <label class="mx-1">Monto: </label>
+                    <input type="number" id="txtMonto" name="txtProceeding" style="cursor:pointer;"  />
+                </div>               
+                <div id="Descripcion" class="form-group" style="margin-top:10px; margin-right:3px">
+                    <label class="mx-1">Descripcion: </label>
+                    <input type="Text" id="txtDescripcion" name="txtProceeding" style="cursor:pointer;"  />
+                </div>
+                <div id="TipoGasto" class="form-group" style="margin-top:10px; margin-right:3px">
+                    <label class="mx-1">TipoIngreso: </label>
+                    <input type="Text" id="txtTipoGasto" name="txtPT" style="cursor: pointer;width: 50px;"  />
+                </div>
+                            <button id="Ingresar" class="btn btn-info" title="Buscar" style="margin:5px;"><span class='fa fa-share' style='text-align: center'></span></button>
+                </div>
+                    </div>
+                </div>
+                                         
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+   @* <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Agregar un nuevo gasto</h3>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm("IngresarGasto", "Ingresos", FormMethod.Post))
+                            {
+                                <div id="datepicker" class="form-group">
+                                    @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Fecha, new { @class = "form-control datepicker" })
+                                </div>
+                                <div id="" class="form-group">
+                                    @Html.LabelFor(model => model.Monto, htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Monto, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TipoGasto, htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.TipoGasto, new { @class = "form-control" })
+                                </div>
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+
+
+
+        $("#Ingresar").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("IngresarGasto", "Ingresos")',
+                data: {
+                    Fecha: $("#txtFecha").val(),
+                    Monto: $("#txtMonto").val(),
+                    Descripcion: $("#txtDescripcion").val(),
+                    TipoIngreso: $("#txtTipoGasto").val()
+                },
+
+                success: function () {
+
+                },
+                error: function () {
+                },
+                complete: function () {
+
+                }
+            });
+
+        });
+    });
+
+
+
+
+</script>
+
+
