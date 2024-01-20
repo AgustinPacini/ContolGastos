@@ -9,14 +9,27 @@ namespace ControlDeGasto.Repository
     {
         private readonly string apiUrl = "https://localhost:44339";
 
-        public void Ingreso(GastoModel gasto)
+        public async Task Ingreso(GastoModel gasto)
         {
-            
-            HttpClient httpClient = new HttpClient();
-            HttpResponseMessage response = httpClient.PostAsJsonAsync($"{apiUrl}/Cobros/Create",gasto).Result;
-            if (!response.IsSuccessStatusCode)
+            var url = $"{apiUrl}/Cobros/Create";
+            try
             {
-                throw new Exception("Ocurrió un error al ingresar el gasto.");
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, gasto);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception($"Error al Ingresar el Cobro. Código de estado: {response.StatusCode}");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al egresar el gasto: {ex.Message}");
+                throw new Exception("Ocurrió un error al egresar el gasto.");
             }
         }
 

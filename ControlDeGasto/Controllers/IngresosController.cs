@@ -20,7 +20,7 @@ namespace ControlDeGasto.Controllers
         }
 
        
-        public ActionResult Ingresos(GastoModel gasto)
+        public ActionResult IngresarGasto(GastoModel gasto)
         {
             // Validar modelo
             if (!ModelState.IsValid)

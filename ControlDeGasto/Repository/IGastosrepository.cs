@@ -4,7 +4,7 @@ namespace ControlDeGasto.Repository
 {
     public interface IGastosRepository
     {
-        void Ingreso(GastoModel gasto);
+        Task Ingreso(GastoModel gasto);
         //void EgresarGasto(GastoModel gasto);
         //Task<List<GastoModel>> ObtenerGastosDelMes(int mes, int anio);
         Task<IEnumerable<GastoModel>> ObtenerGastos(int mes, int anio);

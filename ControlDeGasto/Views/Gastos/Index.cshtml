@@ -71,7 +71,7 @@
            <div class="col-lg-12">
                <div class="card">
                    <div class="card-body">
-                       @using (Html.BeginForm("Index", "Gastos", FormMethod.Get))
+                            @using (Html.BeginForm("ObtenerGastos", "Gastos", FormMethod.Get))
                        {
                            <div class="input-group mb-3">
                                <input type="text" class="form-control" placeholder="Buscar gasto" name="filtro">
@@ -144,7 +144,10 @@
                 },
                 error: function (xhr, status, error) {
                     alert('Error al eliminar el registro');
-                    console.log(xhr.responseText);
+                    
+                },
+                     complete: function () {
+                    alert('Registro eliminado con éxito.');
                 }
             });
         }

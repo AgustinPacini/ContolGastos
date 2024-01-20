@@ -73,37 +73,48 @@
 <script>
 
 
-    $(document).ready(function () {
-        $("#datepicker").datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true
+     var fechaSeleccionada = null;
+
+        $(document).ready(function () {
+            $("#datepicker").datepicker({
+                format: 'yyyy/dd/mm',
+                autoclose: true
+            });
+
+            // Manejar el evento de cambio en el Datepicker
+            $("#datepicker").on("change", function () {
+                fechaSeleccionada = $(this).val();
+                console.log("Fecha seleccionada: " + fechaSeleccionada);
+            });
+
         });
-    });
+$("#Ingresar").click(function () {
+    event.preventDefault();
+    var fechaFormateada = moment(fechaSeleccionada).format('YYYY-MM-DD');
 
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("IngresarGasto", "Ingresos")',
+        data: {
+            Fecha: fechaFormateada,
+            Monto: $("#Monto").val(),
+            Descripcion: $("#Descripcion").val(),
+            TipoGasto: $("#Tipo").val()
+        },
 
-    $("#Ingresar").click(function () {
-        
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("IngresarGasto", "Ingresos")',
-            data: {
-                Fecha: $("#datepicker").val(),
-                Monto: $("#txtMonto").val(),
-                Descripcion: $("#txtDescripcion").val(),
-                TipoIngreso: $("#txtTipoGasto").val()
-            },
+        success: function () {
+            // Redirige a la página de gastos después del éxito
             
-            success: function () {
-
-            },
-            error: function () {
-            },
-            complete: function () {
-
-            }
-        });
-
+        },
+        error: function () {
+            // Maneja el error si es necesario
+        },
+        complete: function () {
+                alert('Se agrego El ingreso Correctamente');
+                window.location.href = '@Url.Action("Index", "Gastos")';
+        }
     });
+});
 
 
 

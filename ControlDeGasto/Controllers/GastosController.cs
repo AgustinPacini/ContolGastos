@@ -14,6 +14,8 @@ namespace ControlDeGasto.Controllers
         {
             _gastosRepository = gastosRepository;
         }
+
+
         public async Task<ActionResult> Index()
         {
             var hoy = DateTime.Today;
