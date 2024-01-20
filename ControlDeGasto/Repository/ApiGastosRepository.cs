@@ -9,24 +9,47 @@ namespace ControlDeGasto.Repository
     {
         private readonly string apiUrl = "https://localhost:44339";
 
-        public void IngresarGasto(GastoModel gasto)
+        public void Ingreso(GastoModel gasto)
         {
+            
             HttpClient httpClient = new HttpClient();
-            HttpResponseMessage response = httpClient.PostAsJsonAsync(apiUrl + "/Gasto/Create", gasto).Result;
+            HttpResponseMessage response = httpClient.PostAsJsonAsync($"{apiUrl}/Cobros/Create",gasto).Result;
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Ocurrió un error al ingresar el gasto.");
             }
         }
 
-        public void EgresarGasto(GastoModel gasto)
+        public async Task EgresarGastoAsync(GastoModel gasto)
         {
-            HttpClient httpClient = new HttpClient();
-            HttpResponseMessage response = httpClient.PostAsJsonAsync(apiUrl + "/Cobros/Create", gasto).Result;
-            if (!response.IsSuccessStatusCode)
+            var url = $"{apiUrl}/Gasto/Create";
+
+            try
             {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, gasto);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception($"Error al egresar el gasto. Código de estado: {response.StatusCode}");
+                    }
+                    
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al egresar el gasto: {ex.Message}");
                 throw new Exception("Ocurrió un error al egresar el gasto.");
             }
+            //var url = $"{apiUrl}/Gasto/Create";
+            //HttpClient httpClient = new HttpClient();
+            //HttpResponseMessage response = httpClient.PostAsJsonAsync(url, gasto).Result;
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    throw new Exception("Ocurrió un error al egresar el gasto.");
+            //}
         }
         public async Task<IEnumerable<GastoModel>> ObtenerGastos(int mes, int anio)
         {
@@ -128,33 +151,52 @@ namespace ControlDeGasto.Repository
         {
             var id = gasto.Id;
             var url = $"{apiUrl}/Gasto/Delete/{id}";
-           
+       
 
             try
             {
-                HttpClient httpClient = new HttpClient();
-                HttpResponseMessage response = httpClient.GetAsync(url).Result;
-
-                if (response.IsSuccessStatusCode)
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    var json = await response.Content.ReadAsStringAsync();
-                    var gastos = JsonConvert.DeserializeObject<GastoModel>(json);
-                    return gastos;
+                    HttpResponseMessage response = await httpClient.DeleteAsync(url);
 
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var json = await response.Content.ReadAsStringAsync();
+                        var gastos = JsonConvert.DeserializeObject<GastoModel>(json);
+                        return gastos;
+                    }
+                    else
+                    {
+                        throw new Exception($"Error al eliminar el gasto. Código de estado: {response.StatusCode}");
+                    }
                 }
-                else
-                {
-                    
-                    
-                }
-                return null;
-
             }
+            //{
+
+            //    //HttpClient httpClient = new HttpClient();
+            //    //HttpResponseMessage response = httpClient.GetAsync(url).Result;
+
+            //    //if (response.IsSuccessStatusCode)
+            //    //{
+            //    //    var json = await response.Content.ReadAsStringAsync();
+            //    //    var gastos = JsonConvert.DeserializeObject<GastoModel>(json);
+            //    //    return gastos;
+
+            //    }
+            //    else
+            //    {
+
+
+            //    }
+            //    return null;
+
+            //}
             catch (Exception ex)
             {
-                throw new Exception("Ocurrió un error al Eliminar El Gasto.");
+                Console.WriteLine($"Error al eliminar el gasto: {ex.Message}");
+                throw new Exception("Ocurrió un error al eliminar el gasto.");
             }
-           
+
         }
 
 

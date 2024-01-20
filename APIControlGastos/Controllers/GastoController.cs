@@ -56,6 +56,7 @@ namespace APIControlGastos.Controllers
         [Route("/Gasto/Create")]
         public async Task<ActionResult<Gasto>> Create(Gasto gasto)
         {
+
             await _gastoRepository.Add(gasto);
 
             return CreatedAtAction(nameof(GetById), new { id = gasto.Id }, gasto);

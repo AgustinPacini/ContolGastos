@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControlDeGasto.Controllers
 {
-    public class CobroController : Controller
+    public class EgresosController : Controller
     {
         private readonly IGastosRepository _gastosRepository;
 
-        public CobroController(IGastosRepository gastosRepository)
+        public EgresosController(IGastosRepository gastosRepository)
         {
             _gastosRepository = gastosRepository;
         }
@@ -25,20 +25,20 @@ namespace ControlDeGasto.Controllers
             // Validar modelo
             if (!ModelState.IsValid)
             {
-                return View("Egreso", gasto);
+                return View("Egreso");
             }
 
             try
             {
                 // Egresar gasto en el repositorio
-                _gastosRepository.EgresarGasto(gasto);
+                _gastosRepository.EgresarGastoAsync(gasto);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Egreso");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Egreso", gasto);
+                return View("Egreso", ex.Message);
             }
         }
     }

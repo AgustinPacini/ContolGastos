@@ -98,13 +98,16 @@
                                        <td id="Fecha">@gasto.Fecha</td>
                                            <td id="Monto">@gasto.Monto</td>
                                            <td id="Descripcion">@gasto.Descripcion</td>
-                                           <td id="TipoGasto">@gasto.TipoGasto</td>
-                                       <td>  
+                                            <td id="TipoGasto">@Enum.GetName(typeof(TipoGasto), gasto.Tipo)</td>
+                                      @*  <td>  
                                                <input id="ID" type="hidden" name="id" value="@gasto.Id" />
                                                <button id="Eliminar"type="button" class="btn btn-danger delete-form">Eliminar</button>
                                            
-                                        </td>
-
+                                        </td> *@
+                                            <td>
+                                                <input type="hidden" name="id" value="@gasto.Id" />
+                                                <button class="btn btn-danger delete-form" data-id="@gasto.Id">Eliminar</button>
+                                            </td>
                                    </tr>
                                }
                            </tbody>
@@ -121,29 +124,49 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> *@
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
     $(document).ready(function () {
         
     });
+    $(".delete-form").click(function () {
+        var id = $(this).data("id");
 
-    $("#Eliminar").click(function () {
-       
         if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
             $.ajax({
                 url: '@Url.Action("Delete", "Gastos")',
                 type: 'POST',
-                data: { Id: $("#ID").val() },
-                success: function(result) {
+                data: { Id: id },
+                success: function (result) {
                     window.location.reload();
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     alert('Error al eliminar el registro');
                     console.log(xhr.responseText);
                 }
             });
         }
     });
+
+    // $("#Eliminar").click(function () {
+       
+    //     if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+    //         $.ajax({
+    //             url: '@Url.Action("Delete", "Gastos")',
+    //             type: 'POST',
+    //             data: { Id: $("#ID").val() },
+    //             success: function(result) {
+    //                 window.location.reload();
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 alert('Error al eliminar el registro');
+    //                 console.log(xhr.responseText);
+    //             }
+    //         });
+    //     }
+    // });
 
 
   

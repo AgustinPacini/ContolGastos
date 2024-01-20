@@ -20,7 +20,7 @@ namespace ControlDeGasto.Controllers
         }
 
        
-        public ActionResult IngresarGasto(GastoModel gasto)
+        public ActionResult Ingresos(GastoModel gasto)
         {
             // Validar modelo
             if (!ModelState.IsValid)
@@ -31,7 +31,7 @@ namespace ControlDeGasto.Controllers
             try
             {
                 // Ingresar gasto en el repositorio
-                _gastosRepository.IngresarGasto(gasto);
+                _gastosRepository.Ingreso(gasto);
 
                 return RedirectToAction("Ingreso");
             }

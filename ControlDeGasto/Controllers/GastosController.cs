@@ -29,7 +29,7 @@ namespace ControlDeGasto.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             // Obtener el gasto correspondiente al id
-            var gasto =await _gastosRepository.GetGastoById(id);
+            var gasto = await _gastosRepository.GetGastoById(id);
 
             if (gasto == null)
             {
@@ -37,8 +37,7 @@ namespace ControlDeGasto.Controllers
             }
 
             // Eliminar el gasto
-            var delet = _gastosRepository.DeleteGasto(gasto);
-            return View(delet);
+            _gastosRepository.DeleteGasto(gasto);
 
             // Redirigir de vuelta a la página de índice
             return RedirectToAction("Index");
